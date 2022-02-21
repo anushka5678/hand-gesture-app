@@ -24,6 +24,34 @@ classifier= ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/
 function modelLoaded(){
     console.log('Model Loaded!');
 }
+function check(){
+    img= document.getElementById('captured_image');
+    classifier.classify(img, gotResult);
+}
+
+function gotResult(error, results){
+    if (error) {
+        console.log(error);
+    } else {
+    console.log(results);
+    document.getElementById("result_emotion_name").innerHTML = results[0].label;
+    document.getElementById("result_emotion_name2").innerHTML = results[1].label;
+    prediction_1 = result[0].label;
+    prediction_2 = result[1].label;
+    speak();
+    if(results[0].label == "peace"){
+    document.getElementById("update_emoji").innerHTML = "&#9996;";
+    }
+    if(results[0].label == "nice"){
+    document.getElementById("update_emoji").innerHTML = "&#128076;";
+}
+    if(results[0].label == "dislike"){
+    document.getElementById("update_emoji").innerHTML = "&#128078;";
+    }
+
+} 
+} 
+
 
 function speak(){
     var synth = window.speechSynthesis;
